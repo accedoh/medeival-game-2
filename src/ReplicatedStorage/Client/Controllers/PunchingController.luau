@@ -7,7 +7,7 @@ local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local Knit = require(Packages.Knit)
 
-local PunchingCharacterComponent = require(ReplicatedStorage.Client.PunchingCharacter)
+local PunchingCharacterComponent = require(ReplicatedStorage.Client.InstanceComponents.PunchingCharacter)
 
 local PunchingController = Knit.CreateController {
     Name = "PunchingController",
