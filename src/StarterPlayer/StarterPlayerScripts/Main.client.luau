@@ -9,7 +9,7 @@ local Knit = require(Packages.Knit)
 local New = Fusion.New
 local Value = Fusion.Value
 
-local ValueDisplay = require(ReplicatedStorage.Client.ValueDisplay)
+local ValueDisplay = require(ReplicatedStorage.Client.InterfaceComponents.ValueDisplay)
 
 local Children = Fusion.Children
 
@@ -33,10 +33,10 @@ New "ScreenGui" {
 }
 
 -- Load Controllers
-local _PunchingController = require(ReplicatedStorage.Client.PunchingController)
+local _PunchingController = require(ReplicatedStorage.Client.Controllers.PunchingController)
 
 -- Load Knit
 Knit.Start():await()
 
 -- Load Components
-local _PunchingCharacterComponent = require(ReplicatedStorage.Client.PunchingCharacter)
+local _PunchingCharacterComponent = require(ReplicatedStorage.Client.InstanceComponents.PunchingCharacter)
