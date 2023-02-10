@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local Fusion = require(Packages.Fusion)
+local Knit = require(Packages.Knit)
 
 local New = Fusion.New
 local Value = Fusion.Value
@@ -30,3 +31,12 @@ New "ScreenGui" {
 
     Parent = PlayerGui,
 }
+
+-- Load Controllers
+local _PunchingController = require(ReplicatedStorage.Client.PunchingController)
+
+-- Load Knit
+Knit.Start():await()
+
+-- Load Components
+local _PunchingCharacterComponent = require(ReplicatedStorage.Client.PunchingCharacter)
