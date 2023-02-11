@@ -13,13 +13,7 @@ local PunchingController = Knit.CreateController {
     Name = "PunchingController",
 }
 
-function PunchingController:KnitInit()
-    print("PunchingController:KnitInit()")
-end
-
 function PunchingController:KnitStart()
-    print("PunchingController:KnitStart()")
-
     RunService:BindToRenderStep("PunchingController", Enum.RenderPriority.Last.Value, function()
         if UserInputService:IsKeyDown(Enum.KeyCode.E) then
             local character = Players.LocalPlayer.Character
