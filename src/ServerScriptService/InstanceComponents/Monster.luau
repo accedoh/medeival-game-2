@@ -4,16 +4,17 @@ local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local Component = require(Packages.Component)
 
-local Monster = Component.new({
+local MonsterServer = Component.new({
+    Tag = "MonsterServer",
     Tag = "Monster",
     Ancestors = {workspace},
 })
 
-function Monster:Start()
+function MonsterServer:Start()
     self.Humanoid = self.Instance:WaitForChild("Humanoid") 
 end
 
-function Monster:Damage(damageAmount)
+function MonsterServer:Damage(damageAmount)
     if damageAmount >= self.Humanoid.Health then
         self.Instance:Destroy()
     end
@@ -21,4 +22,4 @@ function Monster:Damage(damageAmount)
     self.Humanoid.Health = self.Humanoid.Health - damageAmount
 end
 
-return Monster
+return MonsterServer
