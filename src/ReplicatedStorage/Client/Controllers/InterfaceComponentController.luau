@@ -10,6 +10,8 @@ local New = Fusion.New
 local Value = Fusion.Value
 local Children = Fusion.Children
 
+local InterfaceComponentService = nil
+
 local ValueDisplay = require(ReplicatedStorage.Client.InterfaceComponents.ValueDisplay)
 local JimDialogue = require(ReplicatedStorage.Client.InterfaceComponents.JimDialogue)
 
@@ -21,6 +23,8 @@ function InterfaceComponentController:KnitInit()
     self.Cookies = Value(0)
     self.JimDialogueEnabled = Value(false)
     self.JimDialogueText = Value("Hello, I'm jim!")
+    -- Knit Services
+    InterfaceComponentService = Knit.GetService("InterfaceComponentService")
 end
 
 function InterfaceComponentController:KnitStart()
@@ -44,6 +48,12 @@ function InterfaceComponentController:KnitStart()
         
         Parent = Players.LocalPlayer:WaitForChild("PlayerGui"),
     }
+
+    InterfaceComponentService.StateUpdated:Connect(function(stateName, stateValue)
+        self[stateName]:set(stateValue)
+    end)
+
+    InterfaceComponentService:RequestInitialStateSync()
 end
 
 return InterfaceComponentController
