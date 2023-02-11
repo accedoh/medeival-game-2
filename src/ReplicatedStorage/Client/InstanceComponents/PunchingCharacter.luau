@@ -2,14 +2,15 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Packages = ReplicatedStorage:WaitForChild("Packages")
 
+local Knit = require(Packages.Knit)
 local Component = require(Packages.Component)
 
-local PunchingCharacter = Component.new({
+local PunchingCharacterClient = Component.new({
     Tag = "PunchingCharacter",
     Ancestors = {workspace},
 })
 
-function PunchingCharacter:Start()
+function PunchingCharacterClient:Start()
     local animation = Instance.new("Animation")
     animation.AnimationId = "rbxassetid://8396752673"
 
@@ -18,12 +19,13 @@ function PunchingCharacter:Start()
     self._animationTrack = humanoid:LoadAnimation(animation)
 end
 
-function PunchingCharacter:Punch()
+function PunchingCharacterClient:Punch()
     self._animationTrack:Play()
+    Knit.GetService("PunchingService"):Punch(self.Instance)
 end
 
-function PunchingCharacter:Stop()
+function PunchingCharacterClient:Stop()
     self._animationTrack:Destroy()
 end
 
-return PunchingCharacter
+return PunchingCharacterClient

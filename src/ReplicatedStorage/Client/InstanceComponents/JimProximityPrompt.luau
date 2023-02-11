@@ -5,12 +5,12 @@ local Packages = ReplicatedStorage:WaitForChild("Packages")
 local Component = require(Packages.Component)
 local Signal = require(Packages.Signal)
 
-local JimProximityPrompt = Component.new({
+local JimProximityPromptClient = Component.new({
     Tag = "JimProximityPrompt",
     Ancestors = {workspace},
 })
 
-function JimProximityPrompt:Construct()
+function JimProximityPromptClient:Construct()
     -- Create Proximity Prompt
     self._proximityPrompt = Instance.new("ProximityPrompt")
     self._proximityPrompt.ObjectText = "Jim"
@@ -21,14 +21,14 @@ function JimProximityPrompt:Construct()
     self.Triggered = Signal.new()
 end
 
-function JimProximityPrompt:Start()
+function JimProximityPromptClient:Start()
     self._proximityPrompt.Triggered:Connect(function()
         self.Triggered:Fire()
     end)
 end
 
-function JimProximityPrompt:Stop()
+function JimProximityPromptClient:Stop()
     self._proximityPrompt:Destroy()
 end
 
-return JimProximityPrompt
+return JimProximityPromptClient
