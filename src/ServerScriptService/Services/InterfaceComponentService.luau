@@ -38,6 +38,25 @@ function InterfaceComponentService:UpdateState(stateName, stateValue)
     self.Client.StateUpdated:FireAll(stateName, stateValue)
 end
 
+function InterfaceComponentService:HeartbeatUpdate()
+    if next(MonsterComponent:GetAll()) then
+        self:UpdateState("AreMonstersAlive", true)
+    else
+        self:UpdateState("AreMonstersAlive", false)
+    end
+
+    if next(HolyGrailComponent:GetAll()) then
+        self:UpdateState("AreHolyGrailsCollected", false)
+    else
+        self:UpdateState("AreHolyGrailsCollected", true)
+    end
+end
+
+function InterfaceComponentService:KnitStart()
+    RunService.Heartbeat:Connect(function()
+        self:HeartbeatUpdate()
+    end)
+end
 
 function InterfaceComponentService.Client:RequestInitialStateSync(player)
     self.Server:InitialStateSync(player)
