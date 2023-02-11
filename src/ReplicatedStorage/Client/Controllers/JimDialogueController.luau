@@ -25,16 +25,13 @@ function JimDialogueController:OpenDialogue()
     end)
 end
 
-function JimDialogueController:SetDialogue(text)
-    InterfaceComponentController.JimDialogueText:set(text)
-end
-
 function JimDialogueController:CloseDialogue()
     InterfaceComponentController.JimDialogueEnabled:set(false)
 end
 
-function JimDialogueController:KnitStart()
-    self:SetDialogue("Hello, I'm Jim! You should go kill that monster!")
+function JimDialogueController:SetDialogue(text)
+    InterfaceComponentController.JimDialogueText:set(text)
+end
 
 function JimDialogueController:KnitStart()
     JimProximityPromptComponent.Started:Connect(function(component)
@@ -42,6 +39,10 @@ function JimDialogueController:KnitStart()
             self:OpenDialogue()
         end)
     end)
+end
+
+function JimDialogueController:RenderSteppedUpdate()
+
 end
 
 return JimDialogueController

@@ -8,6 +8,7 @@ local Fusion = require(Packages.Fusion)
 
 local New = Fusion.New
 local Value = Fusion.Value
+local Computed = Fusion.Computed
 local Children = Fusion.Children
 
 local InterfaceComponentService = nil
@@ -20,9 +21,14 @@ local InterfaceComponentController = Knit.CreateController {
 }
 
 function InterfaceComponentController:KnitInit()
+    -- Cookie Display
     self.Cookies = Value(0)
+
+    -- Jim Dialogue
     self.JimDialogueEnabled = Value(false)
-    self.JimDialogueText = Value("Hello, I'm jim!")
+    self.AreHolyGrailsCollected = Value(false)
+    self.AreMonstersAlive = Value(false)
+
     -- Knit Services
     InterfaceComponentService = Knit.GetService("InterfaceComponentService")
 end
@@ -35,7 +41,18 @@ function InterfaceComponentController:KnitStart()
 
     self.JimDialogue = JimDialogue {
         Visible = self.JimDialogueEnabled,
-        Text = self.JimDialogueText,
+        
+        Text = Computed(function()
+            if self.AreMonstersAlive:get() then
+                return "Hello, I'm Jim! You should go kill that monster and retrieve the holy grail!"
+            end
+          
+            if self.AreHolyGrailsCollected:get() then
+                return "Thank you for collecting the holy grail! I will now give you ...  a cookie!"
+            else
+                return "Bring me back the holy grail in exchange for a prize. I await your return"
+            end
+        end)
     }
 
     self.UI = New "ScreenGui" {
