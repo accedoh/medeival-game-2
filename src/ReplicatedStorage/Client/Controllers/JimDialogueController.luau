@@ -19,6 +19,10 @@ end
 
 function JimDialogueController:OpenDialogue()
     InterfaceComponentController.JimDialogueEnabled:set(true)
+
+    task.delay(4, function()
+        self:CloseDialogue()
+    end)
 end
 
 function JimDialogueController:SetDialogue(text)
