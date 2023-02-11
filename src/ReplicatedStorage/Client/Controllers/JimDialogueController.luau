@@ -12,13 +12,17 @@ local JimDialogueController = Knit.CreateController {
 
 -- Knit Imports
 local InterfaceComponentController = nil
+local JimDialogueService = nil
 
 function JimDialogueController:KnitInit()
     InterfaceComponentController = Knit.GetController("InterfaceComponentController")
+    JimDialogueService = Knit.GetService("JimDialogueService")
 end
 
 function JimDialogueController:OpenDialogue()
     InterfaceComponentController.JimDialogueEnabled:set(true)
+
+    JimDialogueService:InteractWithJim()
 
     task.delay(4, function()
         self:CloseDialogue()

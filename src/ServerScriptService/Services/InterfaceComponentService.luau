@@ -18,6 +18,7 @@ local InterfaceComponentService = Knit.CreateService({
 
 function InterfaceComponentService:KnitInit()
     self.States = {
+        Cookies = 0,
         AreHolyGrailsCollected = false,
         AreMonstersAlive = false,
     }
@@ -36,6 +37,10 @@ function InterfaceComponentService:UpdateState(stateName, stateValue)
 
     self.States[stateName] = stateValue
     self.Client.StateUpdated:FireAll(stateName, stateValue)
+end
+
+function InterfaceComponentService:GetState(stateName)
+    return self.States[stateName]
 end
 
 function InterfaceComponentService:HeartbeatUpdate()
