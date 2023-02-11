@@ -12,31 +12,41 @@ local JimDialogueController = Knit.CreateController {
 
 -- Knit Imports
 local InterfaceComponentController = nil
+local JimDialogueService = nil
 
 function JimDialogueController:KnitInit()
     InterfaceComponentController = Knit.GetController("InterfaceComponentController")
+    JimDialogueService = Knit.GetService("JimDialogueService")
 end
 
 function JimDialogueController:OpenDialogue()
     InterfaceComponentController.JimDialogueEnabled:set(true)
-end
 
-function JimDialogueController:SetDialogue(text)
-    InterfaceComponentController.JimDialogueText:set(text)
+    JimDialogueService:InteractWithJim()
+
+    task.delay(4, function()
+        self:CloseDialogue()
+    end)
 end
 
 function JimDialogueController:CloseDialogue()
     InterfaceComponentController.JimDialogueEnabled:set(false)
 end
 
-function JimDialogueController:KnitStart()
-    self:SetDialogue("Hello, I'm Jim! You should go kill that monster!")
+function JimDialogueController:SetDialogue(text)
+    InterfaceComponentController.JimDialogueText:set(text)
+end
 
+function JimDialogueController:KnitStart()
     JimProximityPromptComponent.Started:Connect(function(component)
         component.Triggered:Connect(function()
             self:OpenDialogue()
         end)
     end)
+end
+
+function JimDialogueController:RenderSteppedUpdate()
+
 end
 
 return JimDialogueController
