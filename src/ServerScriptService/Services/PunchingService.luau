@@ -44,7 +44,7 @@ function PunchingService:CreateDebugPart(position)
     local debugPart = Instance.new("Part")
     debugPart.Anchored = true
     debugPart.CanCollide = false
-    debugPart.Size = Vector3.new(4, 4, 4)
+    debugPart.Size = Vector3.new(3, 3, 3)
     debugPart.Shape = Enum.PartType.Ball
     debugPart.CFrame = CFrame.new(position)
     debugPart.Parent = workspace
@@ -61,11 +61,11 @@ function PunchingService:Punch(character, component, damage)
     local rootPart = humanoid.RootPart
     if not rootPart then return end
 
-    local punchPosition = rootPart.CFrame:PointToWorldSpace(Vector3.new(0, 0, -4))
+    local punchPosition = rootPart.CFrame:PointToWorldSpace(Vector3.new(0, 0, -3))
 
     self:CreateDebugPart(punchPosition)
 
-    local hitParts = workspace:GetPartBoundsInRadius(punchPosition, 2)
+    local hitParts = workspace:GetPartBoundsInRadius(punchPosition, 1.5)
     local hitComponents = self:GetHitComponents(hitParts, component)
 
     for hitComponent in hitComponents do
