@@ -13,8 +13,6 @@ local JimProximityPromptClient = Component.new({
 function JimProximityPromptClient:Construct()
     -- Create Proximity Prompt
     self._proximityPrompt = Instance.new("ProximityPrompt")
-    self._proximityPrompt.ObjectText = "Jim"
-    self._proximityPrompt.ActionText = "<PLACEHOLDER>"
     self._proximityPrompt.Parent = self.Instance
 
     -- Signal
