@@ -36,6 +36,7 @@ end
 function JimDialogueController:KnitStart()
     self:SetDialogue("Hello, I'm Jim! You should go kill that monster!")
 
+function JimDialogueController:KnitStart()
     JimProximityPromptComponent.Started:Connect(function(component)
         component.Triggered:Connect(function()
             self:OpenDialogue()
