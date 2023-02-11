@@ -12,6 +12,8 @@ local CharacterServer = Component.new({
 
 function CharacterServer:Start()
     self.Humanoid = self.Instance:WaitForChild("Humanoid")
+
+    -- Bind Tags
     CollectionService:AddTag(self.Instance, "PunchingCharacter")
 end
 

@@ -12,9 +12,6 @@ local CharacterClient = Component.new({
 
 function CharacterClient:Start()
     self.Humanoid = self.Instance:FindFirstChildWhichIsA("Humanoid")
-
-    -- Bind Tags
-    CollectionService:AddTag(self.Instance, "PunchingCharacter")
 end
 
 return CharacterClient
