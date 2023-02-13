@@ -17,4 +17,8 @@ function HolyGrailSpawnerServer:SpawnHolyGrail()
     newHolyGrail.Parent = workspace
 end
 
+function HolyGrailSpawnerServer:Start()
+    self:SpawnHolyGrail()
+end
+
 return HolyGrailSpawnerServer
