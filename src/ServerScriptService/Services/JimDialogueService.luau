@@ -1,8 +1,13 @@
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerScriptService = game:GetService("ServerScriptService")
 
 local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local Knit = require(Packages.Knit)
+
+local MonsterSpawnerComponent = require(ServerScriptService.Source.InstanceComponents.MonsterSpawner)
+local HolyGrailSpawnerComponent = require(ServerScriptService.Source.InstanceComponents.HolyGrailSpawner)
 
 local InterfaceComponentService
 
@@ -11,18 +16,18 @@ local JimDialogueService = Knit.CreateService({
     Client = {},
 })
 
-
 function JimDialogueService:KnitInit()
-    self.GaveCookie = false
     InterfaceComponentService = Knit.GetService("InterfaceComponentService")
 end
 
 function JimDialogueService:GiveCookies()
-    if self.GaveCookie then
-        return
+    for _, monsterSpawner in MonsterSpawnerComponent:GetAll() do
+        monsterSpawner:SpawnMonster()
     end
 
-    self.GaveCookie = true
+    for _, grailSpawner in HolyGrailSpawnerComponent:GetAll() do
+        grailSpawner:SpawnHolyGrail()
+    end
 
     local cookies = InterfaceComponentService:GetState("Cookies")
     InterfaceComponentService:UpdateState("Cookies", cookies + 1)
