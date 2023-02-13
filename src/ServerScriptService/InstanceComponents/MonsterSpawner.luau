@@ -17,4 +17,8 @@ function MonsterSpawnerServer:SpawnMonster()
     newMonster.Parent = workspace
 end
 
+function MonsterSpawnerServer:Start()
+    self:SpawnMonster()
+end
+
 return MonsterSpawnerServer
